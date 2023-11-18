@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cfplaccounting-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cfplaccounting
+  template:
+    metadata:
+      labels:
+        app: cfplaccounting
+    spec:
+      containers:
+        - name: cfplaccounting
+          image: pranaysalve/cfplaccounting
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cfplaccounting-srv
+spec:
+  selector:
+    app: cfplaccounting
+  ports:
+    - name: cfplaccounting
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
