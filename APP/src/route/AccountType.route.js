@@ -1,11 +1,13 @@
 const router = require("express").Router();
-const controller = require("../controller/accountTypeController");
-
-router.get("/", controller.getAll).post("/", controller.createOne);
+const controller = require("../controller/routeController");
 
 router
-  .get("/:id", controller.getOne)
-  .patch("/:id", controller.updateOne)
-  .delete("/:id", controller.deleteOne);
+  .get("/", controller.getAll("AccountTypes"))
+  .post("/", controller.createOne("AccountTypes"));
+
+router
+  .get("/:id", controller.getOne("AccountTypes"))
+  .patch("/:id", controller.updateOne("AccountTypes"))
+  .delete("/:id", controller.deleteOne("AccountTypes"));
 
 module.exports = router;
