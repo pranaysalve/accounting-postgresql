@@ -2,12 +2,16 @@ const router = require("express").Router();
 const controller = require("../controller/routeController");
 
 router
-  .get("/", controller.getAll("Account"))
-  .post("/", controller.createOne("Account"));
+  .route("/")
+  .get(controller.getAll("Account"))
+  .post(controller.createOne("Account"));
 
 router
-  .get("/:id", controller.getOne("Account"))
-  .patch("/:id", controller.updateOne("Account"))
-  .delete("/:id", controller.deleteOne("Account"));
+  .route("/:id")
+  .get(controller.getOne("Account"))
+  .patch(controller.updateOne("Account"))
+  .delete(controller.deleteOne("Account"));
+
+router.route("/many").post(controller.createMany("Account"));
 
 module.exports = router;
