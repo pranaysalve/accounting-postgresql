@@ -12,6 +12,6 @@ router
   .patch(controller.updateOne("Customer"))
   .delete(controller.deleteOne("Customer"));
 
-router.route("/many").get(controller.createMany("Customer"));
+router.route("/many").post(controller.createMany("Customer"));
 
 module.exports = router;

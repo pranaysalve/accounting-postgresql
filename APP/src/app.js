@@ -49,6 +49,6 @@ app.use("/api/transaction-entry", TransactionEntry);
 app.use("/api/user", User);
 app.use("/api/vendor", Vendor);
 
-// temp routes
+
 
 module.exports = app;

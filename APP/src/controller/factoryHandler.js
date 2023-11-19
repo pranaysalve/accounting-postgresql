@@ -68,15 +68,17 @@ exports.createOne = (Model) =>
 
 exports.updateOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    const { data, error } = await SUPADB.from(Model)
-      .update({ other_column: "otherValue" })
-      .eq("_id", req.params.id)
-      .select();
+    const model = models[Model];
+    const data = await model.update(req.body, { where: { id: req.params.id } });
 
-    if (error) {
-      return res
-        .status(400)
-        .json({ error: new AppError(error.message, error.code) });
+    if (!data) {
+      return res.status(400).json({
+        result: data.length,
+        data: {
+          status: "success",
+          message: "No account exist! Try to create new a new account",
+        },
+      });
     }
     res.status(200).json({
       result: data.length,
@@ -118,7 +120,7 @@ exports.getOne = (Model) =>
         result: data.length,
         data: {
           status: "success",
-          message: "No account exist! Try to create new a new account",
+          message: "No record exist! Try to create new a new record.",
         },
       });
     }
